@@ -3,34 +3,328 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Retainium learning games</title>
+    <title>Learning games · Retainium</title>
+    <meta
+      name="description"
+      content="Free learning games from Retainium. Practise maths and more in quick, playful rounds on your phone or computer."
+    />
+    <meta name="theme-color" content="#1e3da7" />
+    <link rel="icon" href="./favicon.ico" />
+    <meta property="og:title" content="Retainium learning games" />
+    <meta
+      property="og:description"
+      content="Free learning games from Retainium. Practise maths and more in quick, playful rounds."
+    />
+    <meta property="og:image" content="https://games.retainium.ca/previews/math-dungeons.webp" />
+    <meta property="og:url" content="https://games.retainium.ca/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
     <style>
+      :root {
+        --ink: #0f172a;
+        --ink-muted: #475569;
+        --brand: #1e3da7;
+        --accent: #1e40af;
+        --primary: oklch(0.45 0.15 260);
+        --card: #fff;
+        --line: #dbe3f0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         min-height: 100dvh;
-        display: grid;
-        place-content: center;
-        gap: 1rem;
-        font-family: system-ui, sans-serif;
-        text-align: center;
-        color: #1a1a2e;
-        background: #f4f4f8;
+        display: flex;
+        flex-direction: column;
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        color: var(--ink);
+        background: linear-gradient(165deg, #f0f6fe 0%, #e8eef8 45%, #f8fafc 100%) fixed;
       }
-      ul {
-        list-style: none;
-        padding: 0;
-      }
+
       a {
-        color: #2b59c3;
-        font-size: 1.25rem;
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(100% - 2.5rem, 64rem);
+        margin-inline: auto;
+      }
+
+      header {
+        padding-block: 1.5rem;
+      }
+
+      header .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .wordmark {
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        color: var(--brand);
+        text-decoration: none;
+      }
+
+      .wordmark span {
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--ink-muted);
+      }
+
+      .link-out {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .link-out:hover {
+        text-decoration: underline;
+      }
+
+      .hero {
+        padding-block: 2.5rem 2rem;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 6vw, 3.4rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+
+      .bar {
+        width: 160px;
+        height: 6px;
+        margin-block: 1.25rem;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+
+      .hero p {
+        max-width: 36rem;
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.55;
+        color: var(--ink-muted);
+      }
+
+      main {
+        flex: 1;
+      }
+
+      .games {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+        gap: 1.5rem;
+        padding: 0;
+        margin: 0 0 4rem;
+        list-style: none;
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        background: var(--card);
+        box-shadow:
+          0 1px 2px rgb(15 23 42 / 6%),
+          0 12px 32px -12px rgb(30 61 167 / 22%);
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      a.card:hover,
+      a.card:focus-visible {
+        transform: translateY(-4px);
+        box-shadow:
+          0 1px 2px rgb(15 23 42 / 6%),
+          0 20px 40px -14px rgb(30 61 167 / 35%);
+      }
+
+      a.card:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .card__preview {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 4;
+        object-fit: cover;
+        object-position: top;
+        background: #1b1d33;
+      }
+
+      .card__body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1.25rem 1.35rem 1.4rem;
+      }
+
+      .card h2 {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      .card p {
+        margin: 0;
+        line-height: 1.5;
+        color: var(--ink-muted);
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .tags li {
+        padding: 0.2rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--brand);
+        background: #e6edfb;
+      }
+
+      .play {
+        align-self: flex-start;
+        margin-top: auto;
+        padding: 0.6rem 1.2rem;
+        border-radius: 0.65rem;
+        font-weight: 600;
+        color: #fff;
+        background: var(--primary);
+      }
+
+      .card--soon {
+        align-items: center;
+        justify-content: center;
+        min-height: 22rem;
+        padding: 2rem;
+        border-style: dashed;
+        border-width: 2px;
+        background: rgb(255 255 255 / 55%);
+        box-shadow: none;
+        text-align: center;
+      }
+
+      .card--soon .emoji {
+        font-size: 2.5rem;
+      }
+
+      footer {
+        padding-block: 1.5rem 2rem;
+        border-top: 1px solid var(--line);
+        font-size: 0.9rem;
+        color: var(--ink-muted);
+      }
+
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transition: none;
+        }
+
+        a.card:hover,
+        a.card:focus-visible {
+          transform: none;
+        }
       }
     </style>
   </head>
   <body>
-    <h1>Retainium learning games</h1>
-    <ul>
-      <li><a href="./math-dungeons/">Math Dungeons</a></li>
-    </ul>
-    <p><a href="https://retainium.ca">retainium.ca</a></p>
+    <header>
+      <div class="wrap">
+        <a class="wordmark" href="https://retainium.ca">RETAINIUM <span>Games</span></a>
+        <a class="link-out" href="https://retainium.ca">Go to Retainium →</a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <h1>Learning games</h1>
+        <div class="bar" aria-hidden="true"></div>
+        <p>
+          Quick, free games that turn practice into play. Pick one and start a round. Everything runs
+          right in your browser on a phone, tablet or computer.
+        </p>
+      </section>
+
+      <ul class="games">
+        <li>
+          <a class="card" href="./math-dungeons/">
+            <img
+              class="card__preview"
+              src="./previews/math-dungeons.webp"
+              width="480"
+              height="640"
+              alt="Math Dungeons title screen with a big green troll in a dungeon hallway"
+            />
+            <div class="card__body">
+              <h2>Math Dungeons</h2>
+              <p>
+                A troll is stomping down the hallway. Spin the number wheel to answer before it
+                reaches you and throw your sword to knock it back.
+              </p>
+              <ul class="tags" aria-label="Topics">
+                <li>Addition</li>
+                <li>Subtraction</li>
+                <li>Times tables</li>
+                <li>Division</li>
+              </ul>
+              <span class="play">▶ Play now</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <div class="card card--soon">
+            <div class="card__body">
+              <span class="emoji" aria-hidden="true">🧩</span>
+              <h2>More games coming soon</h2>
+              <p>We're building more ways to practise. Check back soon.</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>© Retainium</span>
+        <a href="https://retainium.ca">retainium.ca</a>
+      </div>
+    </footer>
   </body>
 </html>
